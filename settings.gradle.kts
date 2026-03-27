@@ -16,6 +16,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+maven("https://maven.morphe.app/releases")
     }
 }
 

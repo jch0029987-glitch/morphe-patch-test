@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+ id("app.morphe.patcher") version "1.3.2"    
+
 }
 
 android {
@@ -16,6 +18,20 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+morphe {
+    // The name of your patch as seen in the Manager
+    name.set("PatchTest")
+    
+    // A brief description of what the patch does
+    description.set("My first custom Morphe patch built in jStudio")
+    
+    // Versioning for your patch
+    version.set("1.0.0")
+    
+    // The author name (your GitHub handle)
+    author.set("jch0029987-glitch")
+}
 
     buildTypes {
         release {
@@ -42,4 +58,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+compileOnly("app.morphe.patcher:patcher-api:1.3.2")
 }
