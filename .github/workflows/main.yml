@@ -1,33 +1,27 @@
 name: Build Morphe Patch
+
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch: # Allows you to manually trigger a build from the GH site
+    branches: [ "main" ]
+
+# Add this block here:
+permissions:
+  contents: read
+  packages: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
 
-      - name: Grant Execute Permissions
-        run: chmod +x gradlew
-
-      - name: Build Morphe Bundle
-        # This task is provided by the app.morphe.patcher plugin
-        run: ./gradlew buildAndroid --stacktrace
-
-      - name: Upload MPP Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: PatchTest-MPP
-          # Path where the Morphe plugin outputs the compiled bundle
-          path: app/build/outputs/morphe/*.mpp
+      - name: Build with Gradle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew buildAndroid

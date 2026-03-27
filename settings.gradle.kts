@@ -1,14 +1,16 @@
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
-        // Corrected syntax for these blocks
         maven {
+            name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/MorpheApp/registry")
-        }
-        maven {
-            url = uri("https://jitpack.io")
+            credentials {
+                // Secure: Only uses credentials if they exist in the environment/properties
+                username = providers.gradleProperty("gpr.user").getOrElse(System.getenv("GITHUB_ACTOR") ?: "")
+                password = providers.gradleProperty("gpr.key").getOrElse(System.getenv("GITHUB_TOKEN") ?: "")
+            }
         }
     }
 }
@@ -20,10 +22,12 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             url = uri("https://maven.pkg.github.com/MorpheApp/registry")
+            credentials {
+                username = providers.gradleProperty("gpr.user").getOrElse(System.getenv("GITHUB_ACTOR") ?: "")
+                password = providers.gradleProperty("gpr.key").getOrElse(System.getenv("GITHUB_TOKEN") ?: "")
+            }
         }
-        maven {
-            url = uri("https://jitpack.io")
-        }
+        maven("https://jitpack.io")
     }
 }
 
