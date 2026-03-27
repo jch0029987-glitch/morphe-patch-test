@@ -1,13 +1,11 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
         maven {
-            name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/MorpheApp/registry")
             credentials {
-                // Secure: Only uses credentials if they exist in the environment/properties
                 username = providers.gradleProperty("gpr.user").getOrElse(System.getenv("GITHUB_ACTOR") ?: "")
                 password = providers.gradleProperty("gpr.key").getOrElse(System.getenv("GITHUB_TOKEN") ?: "")
             }
@@ -33,3 +31,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PatchTest"
 include(":app")
+
