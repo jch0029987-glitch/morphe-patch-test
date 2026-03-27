@@ -5,6 +5,10 @@ pluginManagement {
         gradlePluginPortal()
         // This is the missing piece!
         maven("https://maven.morphe.app/releases")
+        name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/MorpheApp/registry")
+
+maven("https://jitpack.io")
     }
 }
 
@@ -14,7 +18,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         // Also add it here for the actual code libraries
-        maven("https://maven.morphe.app/releases")
+        maven("https://maven.pkg.github.com/MorpheApp/registry")
+        maven("https://jitpack.io")
+
     }
 }
 
