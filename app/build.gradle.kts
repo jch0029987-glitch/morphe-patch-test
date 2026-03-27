@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
- id("app.morphe.patcher") version "1.3.2"    
+ id("app.morphe.patches") version "1.2.0"    
 
 }
 

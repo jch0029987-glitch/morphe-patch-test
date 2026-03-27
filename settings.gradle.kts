@@ -1,24 +1,22 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
+        // This is the missing piece!
+        maven("https://maven.morphe.app/releases")
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-maven("https://maven.morphe.app/releases")
+        // Also add it here for the actual code libraries
+        maven("https://maven.morphe.app/releases")
     }
 }
 
-rootProject.name = "Patch test"
+rootProject.name = "PatchTest"
 include(":app")
